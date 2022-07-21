@@ -13,30 +13,30 @@ import java.util.List;
 public class StudentConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentRepository repository){
+    CommandLineRunner commandLineRunner(StudentRepository repository) {
         return args -> {
-                Student dummy1 = new Student(
+            Student dummy1 = new Student(
                     1L,
                     "dummy1",
                     "dummy1@gmail.com",
-                    LocalDate.of(1999, Month.MAY,4)
-                );
+                    LocalDate.of(1999, Month.MAY, 4)
+            );
 
-                Student dummy2 = new Student(
+            Student dummy2 = new Student(
                     2L,
                     "dummy2",
                     "dummy2@gmail.com",
-                    LocalDate.of(1999, Month.OCTOBER,20)
-                 );
+                    LocalDate.of(1999, Month.OCTOBER, 20)
+            );
 
-                Student dummy3 = new Student(
+            Student dummy3 = new Student(
                     3L,
                     "dummy3",
                     "dummy3@gmail.com",
-                    LocalDate.of(1999, Month.DECEMBER,17)
-                );
+                    LocalDate.of(1999, Month.DECEMBER, 17)
+            );
 
-                repository.saveAll(List.of(dummy1,dummy2,dummy3));
+            repository.saveAll(List.of(dummy1, dummy2, dummy3));
         };
     }
 }

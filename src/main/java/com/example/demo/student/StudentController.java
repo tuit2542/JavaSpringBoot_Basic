@@ -17,22 +17,22 @@ public class StudentController {
     private StudentRepository studentRepository;
 
     @Autowired
-    public StudentController(StudentService studentService){
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
     @GetMapping(path = "/getAllStudent")
-    public List<Student> getAllStudent(){
-        return  studentService.getStudents();
+    public List<Student> getAllStudent() {
+        return studentService.getStudents();
     }
 
     @PostMapping(path = "/addStudent")
-    public void registerNewStudent(@RequestBody Student student){
+    public void registerNewStudent(@RequestBody Student student) {
         studentService.addNewStudent(student);
     }
 
     @DeleteMapping(path = "/deleteStudent/{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long id){
+    public void deleteStudent(@PathVariable("studentId") Long id) {
         studentService.deleteStudent(id);
     }
 
@@ -40,8 +40,8 @@ public class StudentController {
     public void updateStudent(
             @PathVariable("studentId") Long studentId,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email){
-        studentService.updateStudent(studentId,name,email);
+            @RequestParam(required = false) String email) {
+        studentService.updateStudent(studentId, name, email);
 
     }
 
