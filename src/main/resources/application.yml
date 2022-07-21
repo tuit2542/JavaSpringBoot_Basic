@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: springuser
+    password: ThePassword
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  error:
+    include-message: always
