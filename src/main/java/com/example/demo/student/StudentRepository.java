@@ -1,14 +1,10 @@
 package com.example.demo.student;
 
-import org.springframework.data.domain.Example;
+import com.example.demo.student.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.swing.text.html.parser.Entity;
 import java.util.Optional;
 
 @Repository
