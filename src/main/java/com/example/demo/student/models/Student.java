@@ -8,19 +8,25 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Entity
-@Table
+@Table(name = "tb_student")
 @Getter
 @Setter
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
+    @Column(name = "student_id")
     private Long id;
+    @Column(name = "student_name")
     private String name;
+    @Column(name = "student_email")
     private String email;
+    @Column(name = "student_birth_date")
     private LocalDate dob;
 
     @Transient
+    @Column(name = "student_age")
     private Integer age;
 
     public Student() {
