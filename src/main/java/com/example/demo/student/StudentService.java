@@ -7,8 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.zip.DataFormatException;
 
 @Service
 public class StudentService {
@@ -49,7 +56,8 @@ public class StudentService {
     }
 
     @Transactional
-    public StudentResponse updateStudent(Long studentId, String name, String email) {
+    public StudentResponse updateStudent(Long studentId, String name, String email,String dob) {
+
 
         StudentResponse response = new StudentResponse();
         String errorMsg = "";
@@ -59,11 +67,23 @@ public class StudentService {
                 "student with id " + studentId + " doesn't exists"
         ));
 
-
         try {
             if (name != null && name.length() > 0 && !(name.equals(student.getName()))) {
                 student.setName(name);
+
             }
+
+            if(dob == ""){
+                errorMsg = "wrong format";
+                throw new DataFormatException("wrong format");
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+            LocalDate dobFormatted = LocalDate.parse(dob.toUpperCase(), formatter);
+            System.out.println(dobFormatted);
+
+            System.out.println("ผ่าน 5");
+
 
             if (email != null && email.length() > 0 && !(email.equals(student.getEmail()))) {
                 Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
@@ -76,13 +96,16 @@ public class StudentService {
                 student.setEmail(email);
             }
 
+            System.out.println("ผ่าน 6");
+
+
 
             successMsg = "data has submit";
             response.setMessage("Student updated success \n,Message: " + successMsg + "!");
             response.setStatus(HttpStatus.OK.value());
 
         } catch (Exception e) {
-            response.setMessage("Student updated failure \n,Message: " + errorMsg + ", \nPlease try again!");
+            response.setMessage("Student updated failure \n,Message: " + errorMsg+e.toString() + ", \nPlease try again!");
             response.setStatus(HttpStatus.NOT_FOUND.value());
         }
 

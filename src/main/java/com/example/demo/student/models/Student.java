@@ -25,7 +25,6 @@ public class Student {
     @Column(name = "student_birth_date")
     private LocalDate dob;
 
-    @Transient
     @Column(name = "student_age")
     private Integer age;
 
@@ -37,12 +36,14 @@ public class Student {
         this.name = name;
         this.email = email;
         this.dob = dob;
+        this.age = this.getAge();
     }
 
-    public Student(String name, String email, LocalDate dob) {
+    public Student(String name, String email, LocalDate dob ) {
         this.name = name;
         this.email = email;
         this.dob = dob;
+
     }
 
     public Integer getAge() {

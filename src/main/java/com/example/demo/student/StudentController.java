@@ -52,14 +52,21 @@ public class StudentController {
 
         String name = (String) requestBody.get("name");
         String email = (String) requestBody.get("email");
+        String dob ="";
+        if(requestBody.get("dob") != null){
+             dob = (String) requestBody.get("dob");
+
+        }
 
         System.out.println("requestBody: "+requestBodyJson);
 
         System.out.println(requestBody);
 
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(dob);
 
-
-       StudentResponse response = studentService.updateStudent(studentId, name, email);
+        StudentResponse response = studentService.updateStudent(studentId, name, email,dob);
        return  response;
     }
 

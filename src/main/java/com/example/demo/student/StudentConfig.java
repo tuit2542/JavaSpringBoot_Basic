@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -15,28 +16,17 @@ public class StudentConfig {
     @Bean
     CommandLineRunner commandLineRunner(StudentRepository repository) {
         return args -> {
-            Student dummy1 = new Student(
-                    1L,
-                    "dummy1",
-                    "dummy1@gmail.com",
-                    LocalDate.of(1999, Month.MAY, 4)
-            );
+            List<Student> listDummy = new ArrayList<>();
+            for (int i = 1  ; i <= 20 ; i ++){
+                int year = (int) 1999 - i;
+                listDummy.add(new Student((long) i,
+                        "dummy"+i,
+                        "dummy"+i+"@gmail.com",
+                        LocalDate.of(year , Month.MAY, i)
+                ));
 
-            Student dummy2 = new Student(
-                    2L,
-                    "dummy2",
-                    "dummy2@gmail.com",
-                    LocalDate.of(1999, Month.OCTOBER, 20)
-            );
-
-            Student dummy3 = new Student(
-                    3L,
-                    "dummy3",
-                    "dummy3@gmail.com",
-                    LocalDate.of(1999, Month.DECEMBER, 17)
-            );
-
-            repository.saveAll(List.of(dummy1, dummy2, dummy3));
+            }
+            repository.saveAll(listDummy);
         };
     }
 }
